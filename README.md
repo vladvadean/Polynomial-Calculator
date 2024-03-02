@@ -28,7 +28,8 @@ The data structures used in this assignment are a TreeMap <Integer, Monomial> us
 The operation class defines and implements all the methods needed, having two polynomials, and is found in the BussinessLogic package.
 
 The GUI is built in the MVC style, the GUI package contains the controller: PolynomialCalculatorController, the view: PolynomialCalculatorView and the model: PolynomialCalculator.
-![UML Class Diagram](https://photos.google.com/photo/AF1QipMHVD9B0S0eeZALrgNpCUnX593oa0wjATea0Hwe)
+![UML Class Diagram](https://github.com/vladvadean/Polynomial-Calculator/assets/126804850/0b5b161f-92cf-4dda-b913-dd586a229530)
+
 
 _UML Class Diagram_
 
