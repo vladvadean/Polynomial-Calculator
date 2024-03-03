@@ -1,5 +1,6 @@
 
 
+
 # Polynomial Calculator
 
 
@@ -14,21 +15,21 @@
 
 ## Assignment Objective
 
-The main objective of the assignment is the implementation of a polynomial calculator with the following operations: add, subtract, multiply, divide, derivate and integrate. For this task we need to extract the two polynomials or only one depending on the operation and to convert it into a polynomial type of variable. Meanwhile, all these actions will be shown with a graphic interface built in the MVC architecture.
+&nbsp;&nbsp;&nbsp;&nbsp;The main objective of the assignment is the implementation of a polynomial calculator with the following operations: add, subtract, multiply, divide, derivate and integrate. For this task we need to extract the two polynomials or only one depending on the operation and to convert it into a polynomial type of variable. Meanwhile, all these actions will be shown with a graphic interface built in the MVC architecture.
 
 ## Problem Analysis, Modeling, Scenarios, Use Cases
 
-The type of polynomial used in this project is made of a map of multiple monomials, having a coefficient and an exponent. This requirement is to convert the input string from the graphic interface and to check for any input mistakes, the user could have introduced. To solve this task, we use a Regex function and first split the polynomial into monomials, and splitting again with Regex, every monomial into coefficient and exponent and creating new instances. If any invalid character is entered or the input does not comply with the correct form for the input, an input exception will be thrown in the result label, letting the user know he must enter a correct form.
+&nbsp;&nbsp;&nbsp;&nbsp;The type of polynomial used in this project is made of a map of multiple monomials, having a coefficient and an exponent. This requirement is to convert the input string from the graphic interface and to check for any input mistakes, the user could have introduced. To solve this task, we use a Regex function and first split the polynomial into monomials, and splitting again with Regex, every monomial into coefficient and exponent and creating new instances. If any invalid character is entered or the input does not comply with the correct form for the input, an input exception will be thrown in the result label, letting the user know he must enter a correct form.
 
-After these steps if everything is in order, the user can choose from any of the six operations presented above, mathematical errors such as dividing by 0, not being a critical exception that will break the process, will show the proper result. Every time a new operation is chosen the text of the result label will refresh and will print the proper result.
+&nbsp;&nbsp;&nbsp;&nbsp;After these steps if everything is in order, the user can choose from any of the six operations presented above, mathematical errors such as dividing by 0, not being a critical exception that will break the process, will show the proper result. Every time a new operation is chosen the text of the result label will refresh and will print the proper result.
 
 ## Design
 
-The data structures used in this assignment are a TreeMap <Integer, Monomial> used to define the polynomial structure and a List<String> to collect the groups resulting from the Regex operation on executed on every monomial. Both of the Polynomial and Monomial classes are found in the DataModels package, along with the InputException, thrown every time the user inserts wrong data format.
+&nbsp;&nbsp;&nbsp;&nbsp;The data structures used in this assignment are a TreeMap <Integer, Monomial> used to define the polynomial structure and a List<String> to collect the groups resulting from the Regex operation on executed on every monomial. Both of the Polynomial and Monomial classes are found in the DataModels package, along with the InputException, thrown every time the user inserts wrong data format.
 
-The operation class defines and implements all the methods needed, having two polynomials, and is found in the BussinessLogic package.
+&nbsp;&nbsp;&nbsp;&nbsp;The operation class defines and implements all the methods needed, having two polynomials, and is found in the BussinessLogic package.
 
-The GUI is built in the MVC style, the GUI package contains the controller: PolynomialCalculatorController, the view: PolynomialCalculatorView and the model: PolynomialCalculator.
+&nbsp;&nbsp;&nbsp;&nbsp;The GUI is built in the MVC style, the GUI package contains the controller: PolynomialCalculatorController, the view: PolynomialCalculatorView and the model: PolynomialCalculator.
 ![UML Class Diagram](https://github.com/vladvadean/Polynomial-Calculator/assets/126804850/0b5b161f-92cf-4dda-b913-dd586a229530)
 
 
@@ -46,15 +47,14 @@ Success Scenarios Steps:
 4.  The calculator returns the correct value
 
 Alternative Sequences:  
-Incorrect data <span style="margin-left:20px;"></span>inserted
+&nbsp;&nbsp;&nbsp;&nbsp;Incorrect data inserted
 
--the result label text prints an error message
-
--the scenario returns to step 1
+ - the result label text prints an error message
+ - the scenario returns to step 1
 
 ## Implementation
 
-The operation class has two attributes: the first polynomial and the second polynomial and it implements all the operations required for the program to work properly. Every operation is defined for both polynomial and monomial data. The polynomial methods that generate the output call the monomial methods implemented in the operation class to deliver an easier understanding and better organization of code. Such a method is the divide operation:
+&nbsp;&nbsp;&nbsp;&nbsp;The operation class has two attributes: the first polynomial and the second polynomial and it implements all the operations required for the program to work properly. Every operation is defined for both polynomial and monomial data. The polynomial methods that generate the output call the monomial methods implemented in the operation class to deliver an easier understanding and better organization of code. Such a method is the divide operation:
 ```java
 private Monomial divide(Monomial m1, Monomial m2) {  
 	// m/this  
@@ -98,9 +98,9 @@ public Array List<Polynomial> divide() {
 	return rez;  
 }
 ```
-As shown above, this is a more complex method that uses more monomial methods. The returned type is a List<Polynomial> that contains the quotient as the first element and the rest as the second element.
+&nbsp;&nbsp;&nbsp;&nbsp;As shown above, this is a more complex method that uses more monomial methods. The returned type is a List<Polynomial> that contains the quotient as the first element and the rest as the second element.
 
-Of course, the program needs to print all the data acquired so an overridden method toString is required to print the resulting polynomial:
+&nbsp;&nbsp;&nbsp;&nbsp;Of course, the program needs to print all the data acquired so an overridden method toString is required to print the resulting polynomial:
 ```java
   @Override public String toString() { 
 	  int k = 0; 
@@ -126,16 +126,16 @@ Of course, the program needs to print all the data acquired so an overridden met
 	  return s; 
    }
 ```
-The View Class has attributes corresponding to all the buttons, labels and text field used.
+&nbsp;&nbsp;&nbsp;&nbsp;The View Class has attributes corresponding to all the buttons, labels and text field used.
 
-An example is the textbox for the first polynomial, in which we specify the background, text color of the text field, and its size:
+&nbsp;&nbsp;&nbsp;&nbsp;An example is the textbox for the first polynomial, in which we specify the background, text color of the text field, and its size:
  ```java
 	pol1 = new TextField(); 
 	pol1.setStyle("-fx-background-color: #292929;-fx-text-inner-color: #FFFFFF;"); pol1.setLayoutX(210.0); 
 	pol1.setLayoutY(150.0); pol1.setPrefWidth(400);
 ```
 
-The Controller Class defines all the actions event handlings for every button. No matter the button the polynomials are always read and checked in a try and catch block. If everything is in order a new instance of the operation class is created using the two polynomials just read and the proper method is called, setting the result’s label text as necessary:
+&nbsp;&nbsp;&nbsp;&nbsp;The Controller Class defines all the actions event handlings for every button. No matter the button the polynomials are always read and checked in a try and catch block. If everything is in order a new instance of the operation class is created using the two polynomials just read and the proper method is called, setting the result’s label text as necessary:
 ```java
  public static EventHandler<ActionEvent>
 	 _subtraction_ = actionEvent -> { Polynomial p1 = null; 
@@ -156,13 +156,13 @@ The Controller Class defines all the actions event handlings for every button. N
 
 ## Results
 
-The results of all six operations are checked with two sets of tests implemented in the OperationTest class using JUnit, found in the test package: one that should output the correct result and one that should output the wrong result:
+&nbsp;&nbsp;&nbsp;&nbsp;The results of all six operations are checked with two sets of tests implemented in the OperationTest class using JUnit, found in the test package: one that should output the correct result and one that should output the wrong result:
 
 ![Results](https://github.com/vladvadean/Polynomial-Calculator/assets/126804850/0779f5c9-1d2b-4d03-b0c5-dfbb24a775d8)
 
 ## Conclusions
 
-This assignment is a good exercise for implementing a complex GUI and to teach you how to make effective use of your own code. Although the algorithms used for the operations were not too complicated, they had to cover any exceptions especially for extracting the input and validating it. The requirements help the programmer maintain an organized code, that is easy to read and to maintain in case of any future developments or any optimizations.
+&nbsp;&nbsp;&nbsp;&nbsp;This assignment is a good exercise for implementing a complex GUI and to teach you how to make effective use of your own code. Although the algorithms used for the operations were not too complicated, they had to cover any exceptions especially for extracting the input and validating it. The requirements help the programmer maintain an organized code, that is easy to read and to maintain in case of any future developments or any optimizations.
 
 ## Bibliography
 
