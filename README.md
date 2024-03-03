@@ -1,4 +1,5 @@
 
+
 # Polynomial Calculator
 
 
@@ -31,11 +32,7 @@ The GUI is built in the MVC style, the GUI package contains the controller: Poly
 ![UML Class Diagram](https://github.com/vladvadean/Polynomial-Calculator/assets/126804850/0b5b161f-92cf-4dda-b913-dd586a229530)
 
 
-_UML Class Diagram_
-
-_<![if !vml]>![](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image004.gif)<![endif]>_
-
-_Graphic Interface_
+![Graphical User Interface](https://github.com/vladvadean/Polynomial-Calculator/assets/126804850/91cef4a2-2e5f-4cbc-be7c-7724b7319d8a)
 
 Use Case: Add two polynomials
 
@@ -49,7 +46,7 @@ Success Scenarios Steps:
 4.  The calculator returns the correct value
 
 Alternative Sequences:  
-Incorrect data inserted
+Incorrect data <span style="margin-left:20px;"></span>inserted
 
 -the result label text prints an error message
 
