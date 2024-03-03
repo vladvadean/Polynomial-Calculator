@@ -55,84 +55,110 @@ Incorrect data <span style="margin-left:20px;"></span>inserted
 ## Implementation
 
 The operation class has two attributes: the first polynomial and the second polynomial and it implements all the operations required for the program to work properly. Every operation is defined for both polynomial and monomial data. The polynomial methods that generate the output call the monomial methods implemented in the operation class to deliver an easier understanding and better organization of code. Such a method is the divide operation:
-
+```java
 private Monomial divide(Monomial m1, Monomial m2) {  
-// m/this  
-//m->m1  
-//this->m2  
-Monomial aux;  
-if (m1 == null) return null;  
-aux = new Monomial(m1.getCoefficient() / m2.getCoefficient(), m1.getExponent() - m2.getExponent());  
-return aux;  
+	// m/this  
+	//m->m1  
+	//this->m2  
+	Monomial aux;  
+	if (m1 == null) return null;  
+		aux = new Monomial(m1.getCoefficient() / m2.getCoefficient(),m1.getExponent() - m2.getExponent());  
+	return aux;  
 }  
   
 public Array List<Polynomial> divide() {  
-//polinomial1->dividend  
-//polinomial2->divisor  
-ArrayList<Polynomial> rez = new ArrayList<>();  
-Polynomial retainP1 = polynomial1;  
-TreeMap<Integer, Monomial> quotient = new TreeMap<>();  
-if (polynomial1.getStructure().lastKey() < polynomial2.getStructure().lastKey()) {  
-rez.add(null);  
-rez.add(polynomial1);  
-}  
-while (polynomial1.getStructure().lastKey() >= polynomial2.getStructure().lastKey()) {  
-Monomial maux;  
-Polynomial paux;  
-TreeMap<Integer, Monomial> listAux = new TreeMap<>();  
-maux = this.divide(polynomial1.getStructure().get(polynomial1.getStructure().lastKey()), polynomial2.getStructure().get(polynomial2.getStructure().lastKey()));  
-listAux.put(maux.getExponent(), maux);  
-paux = new Polynomial(listAux);  
-polynomial1 = this.subtraction(polynomial1, this.multiply(polynomial2, paux));  
-quotinent.put(maux.getExponent(), maux);  
-if (Objects._equals_(polynomial1.getStructure().lastKey(), polynomial1.getStructure().firstKey())) break;  
-polynomial1.getStructure().remove(polynomial1.getStructure().lastKey());  
-listAux.remove(maux.getExponent());  
-}  
-Polynomial pQuotinent = new Polynomial(quotinent);  
-Polynomial pRest = polynomial1;  
-polynomial1 = retainP1;  
-rez.add(pQuotinent);  
-rez.add(pRest);  
-return rez;  
+	//polinomial1->dividend  
+	//polinomial2->divisor  
+	ArrayList<Polynomial> rez = new ArrayList<>();  
+	Polynomial retainP1 = polynomial1;  
+	TreeMap<Integer, Monomial> quotient = new TreeMap<>();  
+	if (polynomial1.getStructure().lastKey() < polynomial2.getStructure().lastKey()) {  
+		rez.add(null);  
+		rez.add(polynomial1);  
+	}  
+	while (polynomial1.getStructure().lastKey() >= polynomial2.getStructure().lastKey()) {  
+		Monomial maux;  
+		Polynomial paux;  
+		TreeMap<Integer, Monomial> listAux = new TreeMap<>();  
+		maux = this.divide(polynomial1.getStructure().get(polynomial1.getStructure().lastKey()), polynomial2.getStructure().get(polynomial2.getStructure().lastKey()));  
+		listAux.put(maux.getExponent(), maux);  
+		paux = new Polynomial(listAux);  
+		polynomial1 = this.subtraction(polynomial1, this.multiply(polynomial2, paux));  
+		quotinent.put(maux.getExponent(), maux);  
+		if (Objects._equals_(polynomial1.getStructure().lastKey(), polynomial1.getStructure().firstKey())) 
+			break;  
+		polynomial1.getStructure().remove(polynomial1.getStructure().lastKey());  
+		listAux.remove(maux.getExponent());  
+	}  
+	Polynomial pQuotinent = new Polynomial(quotinent);  
+	Polynomial pRest = polynomial1;  
+	polynomial1 = retainP1;  
+	rez.add(pQuotinent);  
+	rez.add(pRest);  
+	return rez;  
 }
-
+```
 As shown above, this is a more complex method that uses more monomial methods. The returned type is a List<Polynomial> that contains the quotient as the first element and the rest as the second element.
 
 Of course, the program needs to print all the data acquired so an overridden method toString is required to print the resulting polynomial:
-
-  @Override public String toString() { int k = 0; String s = ""; Monomial first, last; first = this.structure.get(this.structure.lastKey()); last = this.structure.get(this.structure.firstKey()); NavigableMap<Integer, Monomial> aux;  
-  if (first.getExponent() > last.getExponent())  
-  aux = structure.descendingMap();  
-  else aux = structure;  
-  for (Map.Entry<Integer, Monomial> entry : aux.entrySet()) { if (k != 0) { if (entry.getValue().getCoefficient() > 0)  
-  s += '+'; } if (entry.getValue().getCoefficient() != 0)  
-  s += entry.getValue().toString(); k++; } if (s.isEmpty())  
-  s += '0';  
-  return s; }
-
+```java
+  @Override public String toString() { 
+	  int k = 0; 
+	  String s = ""; 
+	  Monomial first, last; 
+	  first = this.structure.get(this.structure.lastKey()); 
+	  last = this.structure.get(this.structure.firstKey()); NavigableMap<Integer, Monomial> aux;  
+	  if (first.getExponent() > last.getExponent())  
+		  aux = structure.descendingMap();  
+	  else 
+		  aux = structure;  
+	  for (Map.Entry<Integer, Monomial> entry : aux.entrySet()) { 
+		  if (k != 0) { 
+			  if (entry.getValue().getCoefficient() > 0)  
+				  s += '+'; 
+		  } 
+		  if (entry.getValue().getCoefficient() != 0)  
+			  s += entry.getValue().toString(); 
+		  k++; 
+	   } 
+	  if (s.isEmpty())  
+		  s += '0';  
+	  return s; 
+   }
+```
 The View Class has attributes corresponding to all the buttons, labels and text field used.
 
 An example is the textbox for the first polynomial, in which we specify the background, text color of the text field, and its size:
-
-pol1 = new TextField(); pol1.setStyle("-fx-background-color: #292929;-fx-text-inner-color: #FFFFFF;"); pol1.setLayoutX(210.0); pol1.setLayoutY(150.0); pol1.setPrefWidth(400);
+ ```java
+	pol1 = new TextField(); 
+	pol1.setStyle("-fx-background-color: #292929;-fx-text-inner-color: #FFFFFF;"); pol1.setLayoutX(210.0); 
+	pol1.setLayoutY(150.0); pol1.setPrefWidth(400);
+```
 
 The Controller Class defines all the actions event handlings for every button. No matter the button the polynomials are always read and checked in a try and catch block. If everything is in order a new instance of the operation class is created using the two polynomials just read and the proper method is called, setting the result’s label text as necessary:
-
-public static EventHandler<ActionEvent> _subtraction_ = actionEvent -> {  
-  Polynomial p1 = null;  
-  try {  
-  p1 = new Polynomial(_calculatorView_.getPol1().getText()); } catch (InputException e) { _calculatorView_.setResult(e.getMessage()); }  
-  Polynomial p2 = null;  
-  try {  
-  p2 = new Polynomial(_calculatorView_.getPol2().getText()); } catch (InputException e) { _calculatorView_.setResult(e.getMessage()); }  
-  Operation op = new Operation(p1, p2); _calculatorView_.setResult(op.subtraction(p1, p2).toString()); };
+```java
+ public static EventHandler<ActionEvent>
+	 _subtraction_ = actionEvent -> { Polynomial p1 = null; 
+	 try { 
+		 p1 = new Polynomial(_calculatorView_.getPol1().getText()); 
+	 } 
+	 catch (InputException e) {
+		 _calculatorView_.setResult(e.getMessage()); 
+	 } Polynomial p2 = null; 
+	 try { 
+		 p2 = new Polynomial(_calculatorView_.getPol2().getText());
+	 } catch (InputException e) {
+		 _calculatorView_.setResult(e.getMessage()); 
+	 } 
+	 Operation op = new Operation(p1, p2); _calculatorView_.setResult(op.subtraction(p1, p2).toString()); 
+ };
+```
 
 ## Results
 
 The results of all six operations are checked with two sets of tests implemented in the OperationTest class using JUnit, found in the test package: one that should output the correct result and one that should output the wrong result:
 
-<![if !vml]>![](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image006.gif)<![endif]>
+![Results](https://github.com/vladvadean/Polynomial-Calculator/assets/126804850/0779f5c9-1d2b-4d03-b0c5-dfbb24a775d8)
 
 ## Conclusions
 
